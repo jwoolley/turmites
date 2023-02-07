@@ -30,6 +30,13 @@ public class ReferenceTile : Tile
     return dimensions;
   }
 
+  public float getWidth() {
+    return getDimensions().x;
+  }
+  public float getHeight() {
+    return getDimensions().y;
+  }
+
   public Tile createTile() {
     Tile tile = GameObject.Instantiate(this);
     Destroy(tile.GetComponent<ReferenceTile>());

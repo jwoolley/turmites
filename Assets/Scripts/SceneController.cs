@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class SceneController : MonoBehaviour
 {
@@ -41,12 +42,24 @@ public class SceneController : MonoBehaviour
         termite.rotate(TermiteBehavior.Rotation.Clockwise);
       } else {
         termite.move(termite.getFacingDirection(),
-          referenceTile.getDimensions().x);
-      }
+          referenceTile.getWidth());
+        spawnTile(color2, termite.getGridPosition());
+    }
       _isTurning = !_isTurning;
     }
 
   bool _isTurning = false;
+
+  private void spawnTile(Color color,(int x, int y) gridPosition) {
+    if (referenceTile != null) {
+      Vector2 position =
+        new Vector2(
+          referenceTile.getPosition().x + gridPosition.x * referenceTile.getWidth(),
+          referenceTile.getPosition().y + gridPosition.y * referenceTile.getHeight()
+        );
+      spawnTile(color, position);
+    }
+  }
 
   private void spawnTile(Color color, Vector2 position) {
       if (referenceTile != null) {
